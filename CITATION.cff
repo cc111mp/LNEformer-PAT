@@ -1,0 +1,32 @@
+cff-version: 1.2.0
+message: "If you use this repository, please cite the associated paper."
+title: "Local Spatial Attention Transformer for Sparse Photoacoustic Image Reconstruction"
+authors:
+  - family-names: Chan
+    given-names: "Simon C. K."
+  - family-names: Shi
+    given-names: Lulin
+  - family-names: Huang
+    given-names: Bingxin
+  - family-names: Wong
+    given-names: "Terence T. W."
+doi: 10.1109/ISBI56570.2024.10635699
+date-released: "2024"
+repository-code: "https://github.com/cc111mp/LNEformer-PAT"
+preferred-citation:
+  type: conference-paper
+  title: "Local Spatial Attention Transformer for Sparse Photoacoustic Image Reconstruction"
+  authors:
+    - family-names: Chan
+      given-names: "Simon C. K."
+    - family-names: Shi
+      given-names: Lulin
+    - family-names: Huang
+      given-names: Bingxin
+    - family-names: Wong
+      given-names: "Terence T. W."
+  conference:
+    name: "2024 IEEE International Symposium on Biomedical Imaging (ISBI)"
+  year: 2024
+  doi: 10.1109/ISBI56570.2024.10635699
+
