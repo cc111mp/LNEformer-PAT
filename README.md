@@ -16,6 +16,8 @@ This repository provides the implementation of **LNEformer** for sparse photoaco
 
 LNEformer is designed to reconstruct high-quality photoacoustic images from sparse-view inputs. The model uses local neighborhood attention and a U-shaped restoration architecture to suppress undersampling artifacts and recover structural details.
 
+Sparse sampling can accelerate PAT acquisition and reduce computational burden, but it also makes reconstruction difficult because sparse measurements introduce undersampling artifacts. LNEformer addresses this by using spatial neighborhood attention to recover local structures that are easily degraded in extremely sparse settings.
+
 ---
 
 ## Release Status
@@ -33,6 +35,19 @@ The repository page is being prepared for the full code release.
 
 ---
 
+## Paper Details
+
+| Item | Description |
+|---|---|
+| Task | Sparse PAT image reconstruction |
+| Venue | IEEE International Symposium on Biomedical Imaging (ISBI), 2024 |
+| Conference | 21st IEEE ISBI, Athens, Greece |
+| Core method | Local neighborhood attention transformer for image restoration |
+| Sparse settings | 16, 32, and 64 projections |
+| Main focus | Suppressing undersampling artifacts while recovering image boundaries and structural details |
+
+---
+
 ## Highlights
 
 - Local spatial attention transformer for sparse-view PAT reconstruction.
@@ -42,11 +57,26 @@ The repository page is being prepared for the full code release.
 
 ---
 
+## Key Ideas
+
+- **Neighborhood attention:** Uses a local sliding-window attention mechanism to model spatial context in sparse PAT images.
+- **Spatial attention over channel-only attention:** Focuses on local image neighborhoods and boundary recovery.
+- **Sparse-view robustness:** Designed to reduce streak and undersampling artifacts from limited projection data.
+- **Transformer-based restoration:** Applies sliding-window attention to PAT image restoration for sparse reconstruction.
+
+---
+
 ## Method Summary
 
 LNEformer reconstructs sparse-view PAT images by combining local neighborhood attention with a hierarchical restoration architecture. The local attention design improves structural recovery while reducing undersampling artifacts introduced by sparse projection acquisition.
 
 The full implementation will include model definitions, configuration files, training scripts, testing scripts, visual examples, and pretrained checkpoints.
+
+---
+
+## Keywords
+
+Photoacoustic tomography, sparse sampling, image reconstruction, image restoration, neighborhood attention, vision transformers.
 
 ---
 
