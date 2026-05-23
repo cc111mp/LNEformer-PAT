@@ -12,87 +12,45 @@ IEEE International Symposium on Biomedical Imaging (**ISBI**), 2024
 
 ## Overview
 
-This repository provides the implementation of **LNEformer** for sparse photoacoustic tomography (PAT) image reconstruction.
+**LNEformer** reconstructs sparse-view photoacoustic tomography (PAT) images with a local spatial attention transformer. The model uses local neighborhood attention and a U-shaped restoration architecture to suppress undersampling artifacts and recover structural details.
 
-LNEformer is designed to reconstruct high-quality photoacoustic images from sparse-view inputs. The model uses local neighborhood attention and a U-shaped restoration architecture to suppress undersampling artifacts and recover structural details.
-
-Sparse sampling can accelerate PAT acquisition and reduce computational burden, but it also makes reconstruction difficult because sparse measurements introduce undersampling artifacts. LNEformer addresses this by using spatial neighborhood attention to recover local structures that are easily degraded in extremely sparse settings.
+This repository is prepared as the release page for the paper implementation. Source code, configs, checkpoints, and full reproduction commands will be added with the code release.
 
 ---
 
-## Release Status
-
-The repository page is being prepared for the full code release.
-
-| Component | Status |
-|---|---|
-| Paper link | Available |
-| Quantitative results | Available |
-| Source code | Preparing for release |
-| Training and testing configs | Preparing for release |
-| Visual comparison figures | Preparing for release |
-| Pretrained checkpoints | Preparing for release |
-
----
-
-## Paper Details
+## At A Glance
 
 | Item | Description |
 |---|---|
 | Task | Sparse PAT image reconstruction |
-| Venue | IEEE International Symposium on Biomedical Imaging (ISBI), 2024 |
-| Conference | 21st IEEE ISBI, Athens, Greece |
-| Core method | Local neighborhood attention transformer for image restoration |
-| Sparse settings | 16, 32, and 64 projections |
-| Main focus | Suppressing undersampling artifacts while recovering image boundaries and structural details |
+| Venue | IEEE ISBI 2024, Athens, Greece |
+| Inputs | Sparse-view reconstructions from 16, 32, and 64 projections |
+| Targets | 512-projection reconstructions |
+| Core method | Local neighborhood attention transformer |
+| Metrics | PSNR / SSIM |
 
 ---
 
 ## Highlights
 
 - Local spatial attention transformer for sparse-view PAT reconstruction.
-- U-shaped restoration architecture for image-to-image reconstruction.
-- Designed for sparse acquisition settings such as 16, 32, and 64 projections.
-- Evaluated against representative restoration baselines including UNet, NAFNet, Restormer, and Shuffleformer.
+- Sliding-window neighborhood attention for local image structure recovery.
+- U-shaped image restoration architecture.
+- Evaluation against UNet, NAFNet, Restormer, and Shuffleformer.
 
 ---
 
-## Key Ideas
+## Release Status
 
-- **Neighborhood attention:** Uses a local sliding-window attention mechanism to model spatial context in sparse PAT images.
-- **Spatial attention over channel-only attention:** Focuses on local image neighborhoods and boundary recovery.
-- **Sparse-view robustness:** Designed to reduce streak and undersampling artifacts from limited projection data.
-- **Transformer-based restoration:** Applies sliding-window attention to PAT image restoration for sparse reconstruction.
-
----
-
-## Method Summary
-
-LNEformer reconstructs sparse-view PAT images by combining local neighborhood attention with a hierarchical restoration architecture. The local attention design improves structural recovery while reducing undersampling artifacts introduced by sparse projection acquisition.
-
-The full implementation will include model definitions, configuration files, training scripts, testing scripts, visual examples, and pretrained checkpoints.
-
----
-
-## Keywords
-
-Photoacoustic tomography, sparse sampling, image reconstruction, image restoration, neighborhood attention, vision transformers.
-
----
-
-## Results
-
-Quantitative comparison on sparse PAT reconstruction.
-
-| Method | Sparse 16 PSNR | Sparse 16 SSIM | Sparse 32 PSNR | Sparse 32 SSIM | Sparse 64 PSNR | Sparse 64 SSIM |
-|---|---:|---:|---:|---:|---:|---:|
-| UNet | 27.65 | 0.827 | 28.88 | 0.867 | 31.56 | 0.903 |
-| NAFNet | 28.58 | 0.808 | 29.58 | 0.870 | 32.61 | 0.899 |
-| Restormer | 27.92 | 0.805 | 30.11 | 0.874 | 30.92 | 0.863 |
-| Shuffleformer | 28.80 | 0.842 | 29.51 | 0.865 | 32.14 | 0.900 |
-| **LNEformer** | **29.39** | **0.853** | **30.74** | **0.874** | **33.17** | **0.907** |
-
-Visual comparison figures will be added together with the full code release.
+| Component | Status |
+|---|---|
+| Paper link | Available |
+| Quantitative results | Available |
+| Source code | Preparing for release |
+| Environment file | Preparing for release |
+| Training / testing configs | Preparing for release |
+| Pretrained checkpoints | Preparing for release |
+| Visual comparison figures | Preparing for release |
 
 ---
 
@@ -114,7 +72,7 @@ pip install -r requirements.txt
 
 ## Dataset
 
-Please organize the dataset as follows:
+Expected data layout:
 
 ```bash
 data/
@@ -129,31 +87,13 @@ data/
     `-- target/
 ```
 
-The sparse input images are reconstructed from 16, 32, or 64 projections.  
-The target images are reconstructed from 512 projections.
+Sparse inputs correspond to 16, 32, or 64 projection reconstructions. Targets correspond to 512-projection reconstructions.
 
 ---
 
-## Training
+## Quick Start
 
-Example training commands for the planned release:
-
-```bash
-python train.py --config configs/lneformer_16.yml
-```
-
-For other sparse settings:
-
-```bash
-python train.py --config configs/lneformer_32.yml
-python train.py --config configs/lneformer_64.yml
-```
-
----
-
-## Testing
-
-Example testing command for the planned release:
+Example commands for the planned release:
 
 ```bash
 python test.py \
@@ -161,9 +101,29 @@ python test.py \
   --checkpoint checkpoints/lneformer_16.pth
 ```
 
+```bash
+python train.py --config configs/lneformer_16.yml
+```
+
 ---
 
-## Pretrained Models
+## Main Results
+
+Quantitative comparison on sparse PAT reconstruction.
+
+| Method | Sparse 16 PSNR | Sparse 16 SSIM | Sparse 32 PSNR | Sparse 32 SSIM | Sparse 64 PSNR | Sparse 64 SSIM |
+|---|---:|---:|---:|---:|---:|---:|
+| UNet | 27.65 | 0.827 | 28.88 | 0.867 | 31.56 | 0.903 |
+| NAFNet | 28.58 | 0.808 | 29.58 | 0.870 | 32.61 | 0.899 |
+| Restormer | 27.92 | 0.805 | 30.11 | 0.874 | 30.92 | 0.863 |
+| Shuffleformer | 28.80 | 0.842 | 29.51 | 0.865 | 32.14 | 0.900 |
+| **LNEformer** | **29.39** | **0.853** | **30.74** | **0.874** | **33.17** | **0.907** |
+
+Visual comparison figures will be added with the full code release.
+
+---
+
+## Model Zoo
 
 | Model | Setting | Link |
 |---|---|---|
