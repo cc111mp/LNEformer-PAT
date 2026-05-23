@@ -11,7 +11,6 @@ authors:
   - family-names: Wong
     given-names: "Terence T. W."
 doi: 10.1109/ISBI56570.2024.10635699
-date-released: "2024"
 repository-code: "https://github.com/cc111mp/LNEformer-PAT"
 preferred-citation:
   type: conference-paper
@@ -29,4 +28,3 @@ preferred-citation:
     name: "2024 IEEE International Symposium on Biomedical Imaging (ISBI)"
   year: 2024
   doi: 10.1109/ISBI56570.2024.10635699
-
